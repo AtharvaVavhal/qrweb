@@ -1,22 +1,325 @@
+/* Custom CSS for Dark Mode Neon (Youthful & Cool) Theme */
 
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
+/* Color Variables */
+:root {
+  --color-background: #121212;
+  --color-neon-green: #00E676; /* Neon Green Accent */
+  --color-secondary: #40C4FF; /* Secondary Blue */
+  --color-text: #E0E0E0; /* Light text for dark background */
+  --color-panel-bg: rgba(255, 255, 255, 0.08); /* Semi-transparent white for glassmorphism */
+  --color-panel-border: rgba(255, 255, 255, 0.15); /* Lighter border for glassmorphism */
 }
 
+body {
+  font-family: "Inter", sans-serif; /* Using Inter font */
+  text-align: center;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Prevent scrollbar from floating dots */
+}
+
+/* Glassmorphism Panel Styling */
+.glass-panel {
+  background-color: var(--color-panel-bg);
+  border: 1px solid var(--color-panel-border);
+  border-radius: 16px; /* More rounded for glassmorphism */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(10px); /* Key glassmorphism effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  padding: 30px;
+  width: 100%;
+  max-width: 450px; /* Slightly wider for modern feel */
+  transition: all 0.5s ease-out; /* Fade-in transition for panels */
+  opacity: 0; /* Hidden by default, will fade in with JS */
+  transform: translateY(20px); /* Slight initial offset for fade-in */
+}
+
+/* Animation for glassmorphism panel fade-in */
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glass-panel.fade-in {
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+
+/* General input styling */
 input {
   display: block;
   margin: 10px auto;
-  padding: 8px;
-  width: 200px;
+  padding: 14px; /* Slightly larger padding */
+  width: 100%;
+  max-width: 320px; /* Adjusted max width */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border for dark mode */
+  border-radius: 10px; /* More rounded */
+  background-color: rgba(0, 0, 0, 0.2); /* Slightly transparent dark input */
+  color: var(--color-text);
+  font-size: 1.05rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none; /* Remove default outline */
 }
 
+input::placeholder {
+  color: rgba(224, 224, 224, 0.6); /* Lighter placeholder text */
+}
+
+input:focus {
+  border-color: var(--color-neon-green);
+  box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.3); /* Neon green glow on focus */
+}
+
+/* General button styling */
 button {
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 12px; /* Slightly more margin */
+  padding: 14px 28px; /* Larger padding */
+  border: none;
+  border-radius: 10px; /* More rounded */
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+  text-transform: uppercase; /* Modern touch */
+  letter-spacing: 0.05em;
 }
 
-.login-container {
-  margin-top: 50px;
+/* Primary button (e.g., Login/Signup) */
+.btn-primary {
+  background-color: var(--color-neon-green);
+  color: var(--color-background); /* Dark text on neon green */
+}
+
+.btn-primary:hover {
+  background-color: #00C853; /* Slightly darker neon green */
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4); /* Stronger neon glow shadow */
+}
+
+/* Accent button (e.g., Create QR, Download CSV) */
+.btn-accent {
+  background-color: var(--color-secondary);
+  color: var(--color-background); /* Dark text on secondary blue */
+}
+
+.btn-accent:hover {
+  background-color: #29B6F6; /* Slightly darker secondary blue */
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(64, 196, 255, 0.4); /* Stronger blue glow shadow */
+}
+
+/* Message Box Styling */
+#messageBox {
+  padding: 12px;
+  margin-top: 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+  display: none;
+  border: 1px solid;
+}
+
+#messageBox.error {
+  background-color: rgba(255, 0, 0, 0.2); /* Semi-transparent red */
+  color: #FF5252; /* Brighter red */
+  border-color: #FF5252;
+}
+
+#messageBox.info {
+  background-color: rgba(0, 230, 118, 0.2); /* Semi-transparent neon green */
+  color: var(--color-neon-green);
+  border-color: var(--color-neon-green);
+}
+
+/* Animations */
+
+/* QR Card Slide-in (for canvas#qrcode) */
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.qr-card-slide-in {
+  animation: slideInFromBottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Spring effect */
+}
+
+/* Scanner Glow Effect (for #reader) */
+@keyframes scannerGlow {
+  0% {
+    box-shadow: 0 0 5px var(--color-neon-green), 0 0 10px var(--color-neon-green);
+    border-color: var(--color-neon-green);
+  }
+  50% {
+    box-shadow: 0 0 15px var(--color-neon-green), 0 0 25px var(--color-neon-green), 0 0 35px var(--color-neon-green);
+    border-color: var(--color-neon-green);
+  }
+  100% {
+    box-shadow: 0 0 5px var(--color-neon-green), 0 0 10px var(--color-neon-green);
+    border-color: var(--color-neon-green);
+  }
+}
+
+.scanner-glow {
+  animation: scannerGlow 2s infinite alternate ease-in-out;
+}
+
+/* Success Checkmark Bounce (apply to a checkmark element/emoji) */
+@keyframes successCheckmarkBounce {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    text-shadow: 0 0 0px var(--color-neon-green);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    text-shadow: 0 0 10px var(--color-neon-green), 0 0 20px var(--color-neon-green);
+  }
+}
+
+.success-checkmark-bounce {
+  animation: successCheckmarkBounce 0.6s ease-out;
+}
+
+
+/* Table Row Fade-in (for dynamically added attendance entries) */
+@keyframes fadeInSlideLeft {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.table-row-fade-in {
+  animation: fadeInSlideLeft 0.5s ease-out forwards;
+}
+
+/* Download Button Hover */
+.download-button-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4); /* Neon green shadow pop */
+}
+
+/* Specific styles for teacher dashboard QR canvas */
+canvas#qrcode {
+  display: block;
+  margin: 20px auto;
+  border: 2px solid var(--color-neon-green); /* Neon green border */
+  border-radius: 16px; /* More rounded */
+  box-shadow: 0 0 15px rgba(0, 230, 118, 0.5), 0 0 25px rgba(0, 230, 118, 0.3); /* Neon glow */
+  background-color: white; /* Ensure background is white for QR visibility */
+  width: 250px; /* Fixed size for QR code */
+  height: 250px; /* Fixed size for QR code */
+  /* Initial state for slide-in animation */
+  opacity: 0;
+  transform: translateY(100px);
+}
+
+/* Floating Background Dots (Optional - requires additional HTML or pseudo-elements) */
+/* This is a more advanced effect. You might need to add a container div with
+   pseudo-elements or actual divs for the dots, and apply animations to them.
+   Example:
+   <div class="background-dots-container"></div>
+*/
+/*
+.background-dots-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-dots-container::before,
+.background-dots-container::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(0, 230, 118, 0.1); // Neon green transparent dots
+  border-radius: 50%;
+  animation: floatAndFade 20s infinite ease-in-out;
+}
+
+.background-dots-container::before {
+  width: 15px;
+  height: 15px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.background-dots-container::after {
+  width: 25px;
+  height: 25px;
+  top: 70%;
+  left: 80%;
+  animation-delay: 10s;
+}
+
+@keyframes floatAndFade {
+  0% {
+    transform: translate(0, 0) scale(0.8);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(20vw, 10vh) scale(1.1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(50vw, 50vh) scale(0.9);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(80vw, 20vh) scale(1.2);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(100vw, 0) scale(0.8);
+    opacity: 0.5;
+  }
+}
+*/
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .glass-panel {
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
 }
