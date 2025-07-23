@@ -1,121 +1,148 @@
-/* Most Simple CSS */
+/* Custom CSS for Dark Mode Neon (Youthful & Cool) Theme - Very Basic Simple Vanilla CSS */
+
+/* Color Variables */
+:root {
+    --color-background: #121212;
+    --color-neon-green: #00E676; /* Neon Green Accent */
+    --color-secondary: #40C4FF; /* Secondary Blue */
+    --color-text: #E0E0E0; /* Light text for dark background */
+    --color-panel-bg: #222; /* Slightly lighter dark background for panels */
+    --color-panel-border: #444; /* Simple border for panels */
+}
 
 body {
-  font-family: sans-serif; /* Basic sans-serif font */
-  text-align: center;
-  background-color: #f0f0f0; /* Light background */
-  color: #333; /* Dark text */
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: 10px; /* Reduced padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-h1, h2 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Basic Panel Styling */
+/* Very Basic Panel Styling */
 .glass-panel {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 100%;
-  max-width: 350px;
-  margin-bottom: 20px; /* Add some space below the panel */
+    background-color: var(--color-panel-bg);
+    border: 1px solid var(--color-panel-border);
+    border-radius: 4px; /* Even simpler rounded corners */
+    /* Removed box-shadow completely */
+    padding: 15px; /* Reduced padding */
+    width: 100%;
+    max-width: 350px; /* Smaller max width */
 }
 
-/* General input styling */
+/* Very Basic Input Styling */
 input {
-  display: block;
-  margin: 10px auto;
-  padding: 8px;
-  width: 100%;
-  max-width: 250px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 1rem;
+    display: block;
+    margin: 8px auto; /* Reduced margin */
+    padding: 8px; /* Reduced padding */
+    width: 100%;
+    max-width: 280px; /* Smaller max width */
+    border: 1px solid #666; /* Simpler border */
+    border-radius: 3px; /* Minimal rounded */
+    background-color: #333; /* Solid dark input */
+    color: var(--color-text);
+    font-size: 0.9rem; /* Smaller font size */
+    outline: none;
 }
 
-/* General button styling */
+input::placeholder {
+    color: #999; /* Simpler placeholder text */
+}
+
+input:focus {
+    border-color: var(--color-neon-green);
+    /* Removed box-shadow on focus */
+}
+
+/* Very Basic Button Styling */
 button {
-  margin: 10px 5px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #007bff; /* Standard blue */
-  color: white;
+    margin: 8px; /* Reduced margin */
+    padding: 8px 16px; /* Reduced padding */
+    border: none;
+    border-radius: 3px; /* Minimal rounded */
+    font-size: 0.9rem; /* Smaller font size */
+    font-weight: normal; /* Normal font weight */
+    cursor: pointer;
+    transition: background-color 0.1s ease; /* Faster, simpler transition */
+    /* Removed box-shadow completely */
+    text-transform: none; /* No uppercase */
+    letter-spacing: normal; /* Normal letter spacing */
 }
 
-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+/* Primary button */
+.btn-primary {
+    background-color: var(--color-neon-green);
+    color: var(--color-background);
 }
 
-/* Message Box Styling */
+.btn-primary:hover {
+    background-color: #00C853;
+}
+
+/* Accent button */
+.btn-accent {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+}
+
+.btn-accent:hover {
+    background-color: #29B6F6;
+}
+
+/* Very Basic Message Box Styling */
 #messageBox {
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 3px;
-  text-align: center;
-  display: none; /* Keep hidden by default */
-  font-size: 0.9em;
+    padding: 8px; /* Reduced padding */
+    margin-top: 15px; /* Reduced margin */
+    border-radius: 3px;
+    font-weight: normal;
+    text-align: center;
+    display: none;
+    border: 1px solid;
+    font-size: 0.85rem; /* Smaller font size */
 }
 
 #messageBox.error {
-  background-color: #ffe0e0;
-  color: #cc0000;
-  border: 1px solid #cc0000;
+    background-color: #4a1a1a; /* Simpler dark red background */
+    color: #FF7777; /* Lighter red text */
+    border-color: #FF7777;
 }
 
 #messageBox.info {
-  background-color: #e0ffe0;
-  color: #008000;
-  border: 1px solid #008000;
+    background-color: #1a4a2a; /* Simpler dark green background */
+    color: #77FF77; /* Lighter green text */
+    border-color: #77FF77;
 }
 
-/* Specific styles for QR canvas and reader */
+/* Very Basic QR canvas styling */
 canvas#qrcode {
-  display: block;
-  margin: 15px auto;
-  border: 1px solid #ccc;
-  background-color: white;
-  width: 200px; /* Reduced size for simplicity */
-  height: 200px;
+    display: block;
+    margin: 15px auto; /* Reduced margin */
+    border: 1px solid var(--color-neon-green); /* Simple border */
+    border-radius: 3px; /* Minimal rounded */
+    /* Removed box-shadow */
+    background-color: white;
+    width: 180px; /* Smaller fixed size */
+    height: 180px; /* Smaller fixed size */
 }
 
-#reader {
-  position: relative;
-  width: 100%;
-  max-width: 250px; /* Reduced size for simplicity */
-  height: 250px;
-  margin: 15px auto;
-  border: 1px solid #ccc;
-  overflow: hidden;
-}
+/* Responsive adjustments - even simpler */
+@media (max-width: 600px) {
+    .glass-panel {
+        padding: 10px;
+    }
 
-#reader video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
-}
+    input {
+        padding: 6px;
+        font-size: 0.85rem;
+    }
 
-/* Remove all animations and their classes for simplicity */
-.qr-card-slide-in,
-.scanner-glow,
-.success-checkmark-bounce,
-.table-row-fade-in,
-.download-button-hover:hover,
-.glass-panel.fade-in {
-  animation: none !important;
-  transition: none !important;
-  box-shadow: none !important; /* Remove shadows from these elements if they were applied by animations */
-  transform: none !important;
+    button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
 }
